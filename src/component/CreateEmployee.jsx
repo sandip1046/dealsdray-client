@@ -160,7 +160,6 @@ const CreateEmployee = () => {
                 <option
                   value="Select Designation"
                   className="text-white bg-[#142246]"
-                  disabled
                 >
                   Select Designation
                 </option>
