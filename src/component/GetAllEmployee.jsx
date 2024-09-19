@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import styles from './styles.module.css'
 import axios from "axios";
 import toast from "react-hot-toast";
 
@@ -61,9 +62,9 @@ export const GetAllEmployee = () => {
   console.log(empList);
   return (
     <>
-    <div className={"flex items-center justify-between m-3"}>
+    <div className={"flex items-center justify-around m-3"}>
+        <div className={`${styles.gradientSignin} !font-serif !text-3xl	!font-extrabold	!mt-1 !p-1`}>Employee List</div>
         <div className={"text-yellow-500 font-bold text-lg"}>
-         
             Total Employee : {empList.employee.length}
         </div>
         <div>Search bar</div>
