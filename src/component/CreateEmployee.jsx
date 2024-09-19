@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { style } from "./style";
 import styles from './styles.module.css'
-import toast from "react-hot-toast";
 import {  useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -31,27 +30,26 @@ const CreateEmployee = () => {
       const response = await axios.post(
         "http://localhost:3000/api/v1/employee/create-employee",
         empDetails
-      ); //sending post request to the /signup endpoint of the BE and we will get response which is stored in a response amd passing postInput as a body
+      ); 
       const jwt = response.data; //getting jwt from the response
       localStorage.setItem("token", jwt); //storing the jwt token at the local storage
-      toast.success("User Logged in successfully");
       navigate("/get-all-employee"); //navigating the user to blog endpoint
     } catch (e) {
       // here we need to alert the user that request got failed.
-     toast.error("Error while Creating : " + e.message);
+    alert("Failed to create employee = "+ e.message);
     }
   };
 
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
+      const reader = new FileReader(); //creating a new file reader
       reader.onload = () => {
         if (reader.readyState === 2) {
-          setEmpDetails({ ...empDetails, Image: reader.result });
+          setEmpDetails({ ...empDetails, Image: reader.result }); //setting the image to the state
         }
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(file); //reading the file
     }
   };
 
@@ -128,7 +126,7 @@ const CreateEmployee = () => {
           </div>
           <br />
 
-          {/* this div is for Mobile_Number */}
+          {/* this div is for Contact */}
           <div className={"w-full flex justify-between"}>
             <div className={"w-[100%]"}>
               <label className={`${style.label}`}>Contact</label>
@@ -181,7 +179,7 @@ const CreateEmployee = () => {
 
           <br />
 
-          {/* this div is for Course Level */}
+          {/* this div is for Genderl */}
           <div className={"w-full flex items-center justify-between "}>
             <div className={"flex items-center justify-center"}>
               <input
@@ -210,6 +208,7 @@ const CreateEmployee = () => {
           </div>
           <br />
 
+          {/* this div is for Course */}
           <div>
             <label className={`${style.label}`}>Course</label>
             <div className={"flex items-center justify-evenly m-3"}>
@@ -247,8 +246,9 @@ const CreateEmployee = () => {
             
           </div>
 
-          {/* this div is for Course Thumbnail */}
-
+        
+          <br />
+          {/* this div is for Image */}
           <div className={"w-full"}>
             <input
               type="file"
@@ -257,6 +257,7 @@ const CreateEmployee = () => {
               className="hidden"
               onChange={handleFileChange}
             />
+            
             <label
               htmlFor="file"
               className={`w-[100%] min-h-[10vh] dark:border-white border-[#00000026] p-3 border flex items-center justify-center ${

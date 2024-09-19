@@ -7,20 +7,21 @@ import CreateEmployee from "./component/CreateEmployee";
 import EditEmployee from "./component/EditEmployee";
 import GetAllEmployee from "./component/GetAllEmployee";
 import Footer from "./component/Footer";
+import ProtectedRoute from "./ProtectedRoute";
 
 const App = () => {
   return (
     <div className={"bg-[#1A284C]"}>
-      
       <BrowserRouter>
-      <Navbar />
+        <Navbar />
         <Routes>
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<Login />} />
-          <Route path="/" element={<Landing />} />
-          <Route path="/create-employee" element={<CreateEmployee />} />
-          <Route path="/edit-employee/:id" element={<EditEmployee />} />
-          <Route path="/get-all-employee" element={<GetAllEmployee />} />
+          <Route path="/" element={<ProtectedRoute element={ <Landing />} />} />
+          <Route path="/create-employee" element={<ProtectedRoute element={  <CreateEmployee />} />} />
+          <Route path="/edit-employee/:id" element={<ProtectedRoute element={  <EditEmployee />} />} />
+          <Route path="/get-all-employee" element={<ProtectedRoute element={<GetAllEmployee />} />} />
+          
         </Routes>
         <Footer />
       </BrowserRouter>

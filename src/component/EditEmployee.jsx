@@ -1,4 +1,5 @@
-//client/src/component/EditEmployee.jsx
+
+
 import { useEffect, useState } from "react";
 import { style } from "./style";
 import styles from './styles.module.css'
@@ -47,9 +48,10 @@ const EditEmployee = () => {
       const response = await axios.put(
         `http://localhost:3000/api/v1/employee/update-employee/${empDetails._id}`,
         empDetails
-      ); //sending post request to the /signup endpoint of the BE and we will get response which is stored in a response amd passing postInput as a body
+      ); 
+      
+      // eslint-disable-next-line no-unused-vars
       const data = response.data; //getting jwt from the response
-      toast.success("User Logged in successfully");
       navigate("/get-all-employee"); //navigating the user to blog endpoint
     } catch (e) {
       // here we need to alert the user that request got failed.
@@ -182,7 +184,6 @@ const EditEmployee = () => {
                 <option
                   value="Select Designation"
                   className="text-white bg-[#142246]"
-                  disabled
                 >
                   Select Designation
                 </option>
@@ -201,7 +202,7 @@ const EditEmployee = () => {
 
           <br />
 
-          {/* this div is for Course Level */}
+          {/* this div is for Gender */}
           <div className={"w-full flex items-center justify-between "}>
             <div className={"flex items-center justify-center"}>
               <input
@@ -230,6 +231,7 @@ const EditEmployee = () => {
           </div>
           <br />
 
+{/* this div is for Course */}
           <div>
             <label className={`${style.label}`}>Course</label>
             <div className={"flex items-center justify-evenly m-3"}>
@@ -267,7 +269,7 @@ const EditEmployee = () => {
             
           </div>
 
-          {/* this div is for Course Thumbnail */}
+          {/* this div is for Employee Image */}
 
           <div className={"w-full"}>
             <input

@@ -1,14 +1,18 @@
 /* eslint-disable no-unused-vars */
-import {  useState,useEffect } from "react";
+// src/components/Login.jsx
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import styles from './styles.module.css'
+import styles from './styles.module.css';
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { login } from "../redux/Slice/authSlice";
 
 
 export const Login = () => {
   
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // infering the  zod type variable to the state variable.
   //like this we can figure what the BE need
@@ -18,21 +22,73 @@ export const Login = () => {
   });
 
   //sending request to the BE from the FE.
+  // async function sendRequest() {
+  //   try {
+  //     const response = await axios.post(
+  //       "http://localhost:3000/api/v1/user/signin",
+  //       postInputs
+  //     ); 
+      
+  //     const jwt = response.data.token;
+  //     const userId = response.data.user._id;  // Extract user ID from response
+      
+  //     localStorage.setItem("token", jwt);
+
+  //     // Fetch user details from the backend using the userId
+  //     const userResponse = await axios.get("http://localhost:3000/api/v1/get-user", {
+  //       params: { _id: userId },
+  //       headers: {
+  //         Authorization: `Bearer ${jwt}` // Pass JWT for authentication
+  //       }
+  //     });
+
+  //     const userData = userResponse.data;
+  //     dispatch(login({ username: userData.name, ...userData })); // Store user data in Redux
+     
+  //     toast.success("User Logged in successfully");
+  //     navigate("/"); 
+  //   } catch (e) {
+  //     if (e.response && e.response.status === 401) {
+  //       alert("Invalid credentials, please try again.");
+  //     } else {
+  //       alert("Error while signing in: " + e.message);
+  //     }
+  //   }
+  // }
   async function sendRequest() {
     try {
       const response = await axios.post(
         "http://localhost:3000/api/v1/user/signin",
         postInputs
-      ); //sending post request to the /signup endpoint of the BE and we will get response which is stored in a response amd passing postInput as a body
-      const jwt = response.data; //getting jwt from the response
-      localStorage.setItem("token", jwt); //storing the jwt token at the local storage
+      );
+  
+      const jwt = response.data.token;
+      const userId = response.data.user._id;  // Extract user ID from response
+      
+      localStorage.setItem("token", jwt);
+  
+      // Fetch user details from the backend using the userId
+      const userResponse = await axios.get("http://localhost:3000/api/v1/get-user", {
+        params: { _id: userId },
+        headers: {
+          Authorization: `Bearer ${jwt}` // Pass JWT for authentication
+        }
+      });
+  
+      const userData = userResponse.data[0];  // Assuming the response is an array of users
+      dispatch(login({ UserName: userData.UserName, ...userData })); // Store user data in Redux
+  
       toast.success("User Logged in successfully");
-      navigate("/"); //navigating the user to blog endpoint
+      navigate("/"); 
     } catch (e) {
-      // here we need to alert the user that request got failed.
-     toast.error("Error while signing in: " + e.message);
+      if (e.response && e.response.status === 401) {
+        alert("Invalid credentials, please try again.");
+      } else {
+        alert("Error while signing in: " + e.message);
+      }
     }
   }
+  
   return (
     <>
    
@@ -46,6 +102,7 @@ export const Login = () => {
         {/* if account already present then this should have the link to route to the sigin page*/}
         <div className="flex flex-row">
           <div className="font-sans text-sm font-base text-slate-800 p-2">
+             {/* eslint-disable-next-line react/no-unescaped-entities */}
             Don't have an account?
           </div>
           <Link
@@ -96,6 +153,7 @@ export const Login = () => {
 
 export default Login;
 
+// eslint-disable-next-line react/prop-types
 function LabelledInput({ label, placeholder, onChange, type }) {
   return (
     <div className="m-0 w-full">
