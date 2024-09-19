@@ -58,7 +58,7 @@ export const Login = () => {
   async function sendRequest() {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v1/user/signin",
+        "https://dealsdray-server-xi.vercel.app/api/v1/user/signin",
         postInputs
       );
   
@@ -68,7 +68,7 @@ export const Login = () => {
       localStorage.setItem("token", jwt);
   
       // Fetch user details from the backend using the userId
-      const userResponse = await axios.get("http://localhost:3000/api/v1/get-user", {
+      const userResponse = await axios.get("https://dealsdray-server-xi.vercel.app/api/v1/get-user", {
         params: { _id: userId },
         headers: {
           Authorization: `Bearer ${jwt}` // Pass JWT for authentication

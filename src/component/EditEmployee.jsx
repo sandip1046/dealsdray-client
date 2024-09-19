@@ -24,7 +24,7 @@ const EditEmployee = () => {
 
   const getEmployeeByID = async (id) => {
     try{
-      const response = await axios.get(`http://localhost:3000/api/v1/employee/get-employee/${id}`);
+      const response = await axios.get(`https://dealsdray-server-xi.vercel.app/api/v1/employee/get-employee/${id}`);
       setEmpDetails(response.data.employee);
       console.log("Fetched from the",response.data);
     }
@@ -46,7 +46,7 @@ const EditEmployee = () => {
     e.preventDefault();
     try {
       const response = await axios.put(
-        `http://localhost:3000/api/v1/employee/update-employee/${empDetails._id}`,
+        `https://dealsdray-server-xi.vercel.app/api/v1/employee/update-employee/${empDetails._id}`,
         empDetails
       ); 
       

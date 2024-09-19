@@ -28,7 +28,7 @@ const CreateEmployee = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v1/employee/create-employee",
+        "https://dealsdray-server-xi.vercel.app/api/v1/employee/create-employee",
         empDetails
       ); 
       const jwt = response.data; //getting jwt from the response

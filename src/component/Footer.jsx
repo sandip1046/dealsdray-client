@@ -1,4 +1,3 @@
-import React from "react";
 import { FaFacebookF, FaLinkedin, FaYoutube, FaInstagram } from "react-icons/fa";
 import { HiBuildingOffice } from "react-icons/hi2";
 import { IoIosPhonePortrait } from "react-icons/io";

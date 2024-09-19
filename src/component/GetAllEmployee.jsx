@@ -41,7 +41,7 @@ export const GetAllEmployee = () => {
   const fetchEmployee = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/v1/employee/get-employee"
+        "https://dealsdray-server-xi.vercel.app/api/v1/employee/get-employee"
       );
       const data = response.data;
       setEmpList(data);
@@ -65,7 +65,7 @@ export const GetAllEmployee = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/api/v1/employee/delete-employee/${id}`);
+      await axios.delete(`https://dealsdray-server-xi.vercel.app/api/v1/employee/delete-employee/${id}`);
       toast.success("Employee deleted successfully");
       fetchEmployee();
     } catch (error) {

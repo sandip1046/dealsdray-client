@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import {  useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from './styles.module.css'
@@ -20,7 +20,7 @@ export const SignUp = () => {
   async function sendRequest() {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v1/user/signup",
+        "https://dealsdray-server-xi.vercel.app/api/v1/user/signup",
         postInputs
       ); //sending post request to the /signup endpoint of the BE and we will get response which is stored in a response amd passing postInput as a body
       const jwt = response.data; //getting jwt from the response
@@ -64,17 +64,7 @@ export const SignUp = () => {
             });
           }}
         />
-{/* 
-        <LabelledInput
-          label="email"
-          placeholder="email@gmail.com"
-          onChange={(e) => {
-            setPostInput({
-              ...postInputs, //take all the existing keys and value
-              email: e.target.value, //overwrite the name  in that existing key
-            });
-          }}
-        /> */}
+
         <LabelledInput
           label="Password"
           type={"password"}
@@ -106,6 +96,7 @@ export const SignUp = () => {
 
 export default SignUp;
 
+// eslint-disable-next-line react/prop-types
 function LabelledInput({ label, placeholder, onChange, type }) {
   return (
     <div className="m-0 w-full">
